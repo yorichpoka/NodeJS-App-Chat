@@ -1,26 +1,21 @@
 // -- Modules -- //
 var fs = require('fs');
-    appInit = require('./appInit');
     moment = require('moment');
 
-// -- Variables -- //
-appInit.init();
-
 // -- Public -- //
-function log(exception, type) {
+function log(exception) {
     // -- Create log objet -- //
     var obj = JSON.stringify({
-                message: exception,
-                type: type,
-                date: moment()
-                }
-            )  + '\n';
-    
+                    message: exception,
+                    date: moment()
+                })  + '\n';
+                
     // -- Write in the log file -- //
-    fs.appendFile(global.$logFileName, obj, (error, file) => {
+    fs.appendFile(global.$appSettings.logFileName, obj, (error, file) => {
+        console.log(error);
         console.log(obj);
     });
 }
 
 // -- Exportation -- //
-exports.log = log;
+module.exports.log = log;

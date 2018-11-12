@@ -1,0 +1,122 @@
+[2018-11-11T20:23:31.988] [ERROR] cheese - Cheese is too ripe!
+[2018-11-12T00:42:53.705] [ERROR] cheese - Cheese is too ripe!
+[2018-11-12T00:42:54.161] [ERROR] cheese - { Error: ER_TRUNCATED_WRONG_VALUE: Incorrect datetime value: '2018-11-12 00:11:72' for column 'date' at row 1
+    at Query.Sequence._packetToError (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Sequence.js:47:14)
+    at Query.ErrorPacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Query.js:77:18)
+    at Protocol._parsePacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:278:23)
+    at Parser.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Parser.js:76:12)
+    at Protocol.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+    at Socket.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:91:28)
+    at Socket.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:502:10)
+    at Socket.emit (events.js:182:13)
+    at addChunk (_stream_readable.js:283:12)
+    at readableAddChunk (_stream_readable.js:264:11)
+    --------------------
+    at Protocol._enqueue (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:144:48)
+    at Connection.query (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:200:25)
+    at Handshake.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\models\dao\messageDAO.js:59:25)
+    at Handshake.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:502:10)
+    at Handshake._callback (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:468:16)
+    at Handshake.Sequence.end (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Sequence.js:83:24)
+    at Handshake.Sequence.OkPacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Sequence.js:92:8)
+    at Protocol._parsePacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:278:23)
+    at Parser.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Parser.js:76:12)
+    at Protocol.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+  code: 'ER_TRUNCATED_WRONG_VALUE',
+  errno: 1292,
+  sqlMessage:
+   'Incorrect datetime value: \'2018-11-12 00:11:72\' for column \'date\' at row 1',
+  sqlState: '22007',
+  index: 0,
+  sql:
+   'UPDATE messages SET id_user=\'0\', message=\'NOM\', date=\'2018-11-12 00:11:72\'  WHERE id=4' }
+[2018-11-12T00:58:04.811] [ERROR] cheese - { Error: ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`db_nodejs_chat`.`messages`, CONSTRAINT `FK_Users_Messages` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+    at Query.Sequence._packetToError (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Sequence.js:47:14)
+    at Query.ErrorPacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Query.js:77:18)
+    at Protocol._parsePacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:278:23)
+    at Parser.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Parser.js:76:12)
+    at Protocol.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+    at Socket.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:91:28)
+    at Socket.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:502:10)
+    at Socket.emit (events.js:182:13)
+    at addChunk (_stream_readable.js:283:12)
+    at readableAddChunk (_stream_readable.js:264:11)
+    --------------------
+    at Protocol._enqueue (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:144:48)
+    at Connection.query (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:200:25)
+    at Handshake.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\models\dao\messageDAO.js:59:25)
+    at Handshake.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:502:10)
+    at Handshake._callback (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:468:16)
+    at Handshake.Sequence.end (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Sequence.js:83:24)
+    at Handshake.Sequence.OkPacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Sequence.js:92:8)
+    at Protocol._parsePacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:278:23)
+    at Parser.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Parser.js:76:12)
+    at Protocol.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+  code: 'ER_NO_REFERENCED_ROW_2',
+  errno: 1452,
+  sqlMessage:
+   'Cannot add or update a child row: a foreign key constraint fails (`db_nodejs_chat`.`messages`, CONSTRAINT `FK_Users_Messages` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)',
+  sqlState: '23000',
+  index: 0,
+  sql:
+   'UPDATE messages SET id_user=\'0\', message=\'NOM\', date=\'2018-11-12 12:58:03\'  WHERE id=4' }
+[2018-11-12T01:46:57.684] [ERROR] toFileText - { Error: ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`db_nodejs_chat`.`messages`, CONSTRAINT `FK_Users_Messages` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+    at Query.Sequence._packetToError (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Sequence.js:47:14)
+    at Query.ErrorPacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Query.js:77:18)
+    at Protocol._parsePacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:278:23)
+    at Parser.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Parser.js:76:12)
+    at Protocol.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+    at Socket.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:91:28)
+    at Socket.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:502:10)
+    at Socket.emit (events.js:182:13)
+    at addChunk (_stream_readable.js:283:12)
+    at readableAddChunk (_stream_readable.js:264:11)
+    --------------------
+    at Protocol._enqueue (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:144:48)
+    at Connection.query (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:200:25)
+    at Handshake.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\models\dao\messageDAO.js:59:25)
+    at Handshake.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:502:10)
+    at Handshake._callback (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:468:16)
+    at Handshake.Sequence.end (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Sequence.js:83:24)
+    at Handshake.Sequence.OkPacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Sequence.js:92:8)
+    at Protocol._parsePacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:278:23)
+    at Parser.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Parser.js:76:12)
+    at Protocol.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+  code: 'ER_NO_REFERENCED_ROW_2',
+  errno: 1452,
+  sqlMessage:
+   'Cannot add or update a child row: a foreign key constraint fails (`db_nodejs_chat`.`messages`, CONSTRAINT `FK_Users_Messages` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)',
+  sqlState: '23000',
+  index: 0,
+  sql:
+   'UPDATE messages SET id_user=\'0\', message=\'NOM\', date=\'2018-11-12 01:46:57\'  WHERE id=4' }
+[2018-11-12T02:12:40.954] [ERROR] toFileText - { Error: ER_NO_REFERENCED_ROW_2: Cannot add or update a child row: a foreign key constraint fails (`db_nodejs_chat`.`messages`, CONSTRAINT `FK_Users_Messages` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+    at Query.Sequence._packetToError (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Sequence.js:47:14)
+    at Query.ErrorPacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Query.js:77:18)
+    at Protocol._parsePacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:278:23)
+    at Parser.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Parser.js:76:12)
+    at Protocol.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+    at Socket.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:91:28)
+    at Socket.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:502:10)
+    at Socket.emit (events.js:182:13)
+    at addChunk (_stream_readable.js:283:12)
+    at readableAddChunk (_stream_readable.js:264:11)
+    --------------------
+    at Protocol._enqueue (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:144:48)
+    at Connection.query (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:200:25)
+    at Handshake.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\models\dao\messageDAO.js:59:25)
+    at Handshake.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:502:10)
+    at Handshake._callback (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:468:16)
+    at Handshake.Sequence.end (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Sequence.js:83:24)
+    at Handshake.Sequence.OkPacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\sequences\Sequence.js:92:8)
+    at Protocol._parsePacket (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:278:23)
+    at Parser.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Parser.js:76:12)
+    at Protocol.write (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+  code: 'ER_NO_REFERENCED_ROW_2',
+  errno: 1452,
+  sqlMessage:
+   'Cannot add or update a child row: a foreign key constraint fails (`db_nodejs_chat`.`messages`, CONSTRAINT `FK_Users_Messages` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)',
+  sqlState: '23000',
+  index: 0,
+  sql:
+   'UPDATE messages SET id_user=\'0\', message=\'NOM\', date=\'2018-11-12 02:12:40\'  WHERE id=4' }

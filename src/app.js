@@ -1,47 +1,59 @@
-var mysql = require('mysql');
-var appLog = require('./modules/appLog');
-var appJS = require('./modules/appJS');
+// -- Modules -- //
+var appStart = require('./modules/appStart')();
+    // userDAO = require('./models/dao/userDAO'),
+    messageDAO = require('./models/dao/messageDAO'),
+    // userBO = require('./models/bo/userBO'),
+    appLib = require('./modules/appLib'),
+    $ = require('jquery'),
+    moment = require('moment');
 
-// -- Create connection -- //
-// var con = mysql.createConnection({
-//     host: "localhost",
-//     user: "root", 
-//     password: "",
-//     database: ""
-// });
+var dao = new messageDAO();
 
-// con.connect((error, value) => {
-//     if (error) throw err;
-//     console.log("Connected!");
-//     console.log(value);
-// });
+// dao.add({id_user: 1, message: 'OK', date: moment()}).then(
+//   function(result){
+//     appLib.consoleOut('add');
+//     appLib.consoleOut(result);
 
-// -- Execute query in connection -- //
-// con.connect(function(err) {
-//     if (err) throw err;
-//     console.log("Connected!");
-//     con.query(sql, function (err, result) {
-//       if (err) throw err;
-//       console.log("Result: " + result);
-//     });
-//   });
+//     dao.get().then(
+//       function(result){
+//         appLib.consoleOut('get');
+//         appLib.consoleOut(result);
+//       }
+//     );
+//   }
+// );
 
-  // -- Creating databases -- //
-//   con.connect(function(err) {
-//     if (err) throw err;
-//     console.log("Connected!");
-//     con.query("CREATE DATABASE mydb", function (err, result) {
-//       if (err) throw err;
-//       console.log("Database created");
-//     });
-//   });
+// dao.get(3).then(
+//   function(result){
+//     appLib.consoleOut('get');
+//     appLib.consoleOut(result);
+//   }
+// );
 
-  // -- Test -- //
-  // appLog.log('POKA', 'Test');
-  // appJS.log('Ulrich', 'Test');
-  // appJS.logStringify({a: 1, b: new Date()});
+// dao.del(3).then(
+//   function(result){
+//     appLib.consoleOut('del');
+//     appLib.consoleOut(result);
 
-  appJS.log(
-    appJS.appSettings('logFileName')
-  );
+//     dao.get().then(
+//       function(result){
+//         appLib.consoleOut('get');
+//         appLib.consoleOut(result);
+//       }
+//     );
+//   }
+// );
 
+dao.upd({id: 4, id_user: 0, message: 'NOM', date: moment()}).then(
+  function(result){
+    appLib.consoleOut('del');
+    appLib.consoleOut(result);
+
+    dao.get().then(
+      function(result){
+        appLib.consoleOut('get');
+        appLib.consoleOut(result);
+      }
+    );
+  }
+);

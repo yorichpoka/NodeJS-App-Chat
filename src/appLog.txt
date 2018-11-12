@@ -1,3 +1,0 @@
-{"message":"POKA","type":"Test","date":"2018-11-09T20:56:09.983Z"}
-{"message":"POKA","type":"Test","date":"2018-11-09T20:56:13.064Z"}
-{"message":"POKA","type":"Test","date":"2018-11-09T20:56:13.659Z"}
