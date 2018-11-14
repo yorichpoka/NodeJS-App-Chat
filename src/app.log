@@ -120,3 +120,22 @@
   index: 0,
   sql:
    'UPDATE messages SET id_user=\'0\', message=\'NOM\', date=\'2018-11-12 02:12:40\'  WHERE id=4' }
+[2018-11-12T16:15:07.860] [ERROR] toFileText - { Error: connect ECONNREFUSED 127.0.0.1:3306
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1113:14)
+    --------------------
+    at Protocol._enqueue (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:144:48)
+    at Protocol.handshake (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\protocol\Protocol.js:51:23)
+    at Connection.connect (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\node_modules\mysql\lib\Connection.js:118:18)
+    at Promise (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\models\dao\messageDAO.js:54:21)
+    at new Promise (<anonymous>)
+    at messageDAO.upd (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\models\dao\messageDAO.js:48:16)
+    at Object.<anonymous> (E:\DOCUMENTS\Le Chat\NodeJS-App-Chat\src\app.js:49:5)
+    at Module._compile (internal/modules/cjs/loader.js:688:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:699:10)
+    at Module.load (internal/modules/cjs/loader.js:598:32)
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 3306,
+  fatal: true }

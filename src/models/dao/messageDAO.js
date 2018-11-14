@@ -2,7 +2,7 @@
 var messageBO = require("../bo/messageBO"),
     mysql = require('mysql'),
     dao = require('./dao'),
-    appLib = require('../../modules/appLib');
+    appModule = require('../../modules/appModule');
 
 // -- Exportation -- //
 module.exports = class messageDAO extends dao {
@@ -17,7 +17,7 @@ module.exports = class messageDAO extends dao {
         return new Promise((successCallback) => {
             try {
                 // -- Create connecion -- //
-                var con = appLib.mysqlConnection();
+                var con = appModule.mysqlConnection();
                 
                 // -- Execute query -- //
                 con.connect(function(err) {
@@ -26,7 +26,7 @@ module.exports = class messageDAO extends dao {
                     
                     // -- Query -- //
                     con.query(
-                        "INSERT INTO " + that.tableName + " (id_user, message, date) VALUES ('" + obj.id_user + "', '" + obj.message + "', '" + appLib.convert.toDateToString(obj.date) + "')", 
+                        "INSERT INTO " + that.tableName + " (id_user, message, date) VALUES ('" + obj.id_user + "', '" + obj.message + "', '" + appModule.convert.toDateToString(obj.date) + "')", 
                         function (err, result) {
                             // -- Check if error -- //
                             if (err) { global.$logger.error(err); throw err; }
@@ -48,7 +48,7 @@ module.exports = class messageDAO extends dao {
         return new Promise((successCallback) => {
             try {
                 // -- Create connecion -- //
-                var con = appLib.mysqlConnection();
+                var con = appModule.mysqlConnection();
                 
                 // -- Execute query -- //
                 con.connect(function(err) {
@@ -57,7 +57,7 @@ module.exports = class messageDAO extends dao {
                     
                     // -- Query -- //
                     con.query( 
-                        "UPDATE " + that.tableName + " SET id_user='" + obj.id_user + "', message='" + obj.message + "', date='" + appLib.convert.toDateToString(obj.date) + "'  WHERE id=" + obj.id,
+                        "UPDATE " + that.tableName + " SET id_user='" + obj.id_user + "', message='" + obj.message + "', date='" + appModule.convert.toDateToString(obj.date) + "'  WHERE id=" + obj.id,
                         function (err, result) {
                             // -- Check if error -- //
                             if (err) { global.$logger.error(err); throw err; }
@@ -79,7 +79,7 @@ module.exports = class messageDAO extends dao {
         return new Promise((successCallback) => {
             try {
                 // -- Create connecion -- //
-                var con = appLib.mysqlConnection();
+                var con = appModule.mysqlConnection();
                 
                 // -- Execute query -- //
                 con.connect(function(err) {
@@ -110,7 +110,7 @@ module.exports = class messageDAO extends dao {
         return new Promise((successCallback) => {
             try {
                 // -- Create connecion -- //
-                var con = appLib.mysqlConnection();
+                var con = appModule.mysqlConnection();
             
                 // -- Execute query -- //
                 con.connect(function(err) {

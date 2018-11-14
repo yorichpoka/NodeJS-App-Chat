@@ -2,7 +2,7 @@
 var userBO = require("../bo/userBO"),
     mysql = require('mysql'),
     dao = require('./dao'),
-    appLib = require('../../modules/appLib');
+    appModule = require('../../modules/appModule');
 
 // -- Exportation -- //
 module.exports = class UserDAO extends dao {
@@ -17,7 +17,7 @@ module.exports = class UserDAO extends dao {
         return new Promise((successCallback) => {
             try {
                 // -- Create connecion -- //
-                var con = appLib.mysqlConnection();
+                var con = appModule.mysqlConnection();
                 
                 // -- Execute query -- //
                 con.connect(function(err) {
@@ -48,7 +48,7 @@ module.exports = class UserDAO extends dao {
         return new Promise((successCallback) => {
             try {
                 // -- Create connecion -- //
-                var con = appLib.mysqlConnection();
+                var con = appModule.mysqlConnection();
                 
                 // -- Execute query -- //
                 con.connect(function(err) {
@@ -79,7 +79,7 @@ module.exports = class UserDAO extends dao {
         return new Promise((successCallback) => {
             try {
                 // -- Create connecion -- //
-                var con = appLib.mysqlConnection();
+                var con = appModule.mysqlConnection();
                 
                 // -- Execute query -- //
                 con.connect(function(err) {
@@ -110,7 +110,7 @@ module.exports = class UserDAO extends dao {
         return new Promise((successCallback) => {
             try {
                 // -- Create connecion -- //
-                var con = appLib.mysqlConnection();
+                var con = appModule.mysqlConnection();
             
                 // -- Execute query -- //
                 con.connect(function(err) {

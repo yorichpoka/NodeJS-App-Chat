@@ -1,6 +1,6 @@
 // -- Modules -- //
-var fs = require('fs'),
-    log4js = require('log4js');
+var log4js = require('log4js'),
+    appModule = require('./appModule'),
     appSettingsJson = require('../appSettings.json');
 
 // -- Exportation -- //
@@ -24,6 +24,8 @@ module.exports = function() {
             }
           }
     );
-
+    
+    // -- Define global variable -- //
     global.$logger = log4js.getLogger('toFileText');
+    global.$appModule = appModule;
 };

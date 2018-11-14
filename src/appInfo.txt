@@ -1,0 +1,1 @@
+browserify modules/appModule.js -o public/js/appModule.dist.js
