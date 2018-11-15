@@ -1,13 +1,23 @@
 //#region Class
-class Notification {
+class NotificationBO {
 
-    constructor(){
-        this.est_echec = true;
-        this.donnee = {};
-        this.message = 'Connection lost with server.';
-    }
+	constructor(data = null, isSuccess = true, message = null) {
+    
+		// -- Attributes -- //
+		this.data = data;
+		this.isSuccess = isSuccess;
+		this.message = message === null ? isSuccess ? 'success' 
+													: 'fail'
+										: message;
+	  }
+  
+  }
+//#endregion
 
-}
+//#region Global parameters
+var $parameters;
+var function_setTimeout;
+var function_setInterval;
 //#endregion
 
 // -- Display or not the loading page -- //
@@ -46,32 +56,41 @@ function loadICheck(color, attribute = 'flat-iCheck') {
 }
 
 // -- Message box de notification -- //
-function messageBox(notification = new Notification()) {
+function messageBox(notification = new NotificationBO()) {
 
+    // -- Kill the the old  -- //
+	clearTimeout(function_setTimeout);
+	
 	// -- Mise à jour de la taille -- //
 	$('#modal_message_taille').removeClass('modal-dialog');
 	$('#modal_message_taille').addClass('modal-dialog modal-sm');
 	// -- Définir l'entête -- //
-	$('#modal_message_titre').html('<i class="fa fa-info text-' + ((notification.est_echec != null) ? (notification.est_echec) ? 'danger'
-			                                                                                                                    : 'success'
-		                                                                                            : 'info') + '"></i> Information');
+	$('#modal_message_titre').html('<i class="fa fa-info-circle text-' + ((notification.isSuccess != null) ? (!notification.isSuccess) ? 'danger'
+			                                                                                                                    		: 'success'
+		                                                                                            		: 'info') + '"></i> Information');
 	// -- Definir le message -- //
 	$('#modal_message_text').html(notification.message);
 	// -- Afficher -- //
 	$('#modal_message').modal('show');
 
 	// -- Ne pas fermer si la valeur est -1 -- //
-	if (appModule.appSettings.messageBoxVisibilityDelay > 0) {
+	if ($parameters.messageBoxVisibilityDelay > 0) {
 		// -- Supprimer l'alert après un temps défini -- //
-		setTimeout(
-			function () {
-				// -- Fermer le modal -- //
-				$('#modal_message').modal('hide');
-			},
-			appModule.appSettings.messageBoxVisibilityDelay
-		);
+		function_setTimeout = 
+			setTimeout(
+				function () {
+					// -- Fermer le modal -- //
+					$('#modal_message').modal('hide');
+				},
+				$parameters.messageBoxVisibilityDelay
+			);
 	}
 
+}
+
+// -- Load global parameters -- //
+function loadGlobalParameters(value = []){
+	$parameters = appModule.convert.toDecryptAES(value[1], value[0]);
 }
 
 // -- On loading page -- //
@@ -94,13 +113,6 @@ $(
         .hide()
         .appendTo('body');
         //#endregion
-        var a = appModule.appSettings();
-        
-        console.log(
-            JSON.stringify(a)
-        );
-
-        // appModule.consoleOutStringify(appModule.appSettings());
 
         //#region iCheck
         loadICheck('green');

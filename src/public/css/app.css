@@ -1,7 +1,13 @@
-.container {
-    margin-top: 30px;
+.auth-form {
+    margin: 0 auto;
+    width: 340px;
 }
 
-form label {
+body {
+    font-family: 'TitilliumWeb';
+}
+
+label {
     font-weight: bold;
+    color: rgba(0, 0, 0, 0.7);
 }

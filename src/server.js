@@ -3,8 +3,12 @@ var appStart = require('./modules/appStart')(),
     express = require('express'),
     authenticationRoute = require('./routes/authenticationRoute'),
     administrationRoute = require('./routes/administrationRoute'),
+    chatRoute = require('./routes/chatRoute'),
     http = require('http'),
     socketIo = require('socket.io'),
+    uniqid = require('uniqid'),
+    cookieSession = require('cookie-session'),
+    cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser');
 //#endregion
 
@@ -20,6 +24,9 @@ app.set('views', './views');
 
 // -- Define views engine -- //
 app.set('views engine', 'ejs');
+
+// trust first proxy
+app.set('trust proxy', 1);
 //#endregion
 
 //#region Middlewares
@@ -33,12 +40,39 @@ app.use('/images', express.static('./public/images'));
 // -- Define others middlewares -- //
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// -- Define cookieSession -- //
+app.use(cookieSession({
+    secret: 'todotopsecret'
+    // name: 'session',
+    // keys: ['id', 'user'],
+    // maxAge: (24 * 60 * 60 * 1000),
+    // httpOnly: false,
+}));
+
+// -- Define cookieParser -- //
+app.use(cookieParser());
 //#endregion
 
 //#region Define routes
+// -- Init -- //
+app.use(function(req, res, next){
+    // -- Update session value -- //
+    if (typeof(req.session.con) == 'undefined') {
+        req.session.con = {
+            id: uniqid(),
+            user: {
+                name: '',
+                code: ''
+            }
+        }
+    }
+    next();
+});
+
 // -- The main page -- //
-app.get('/', (req, res, next) => {
-    // -- Redirection to the login -- /
+app.get('/', (req, res, next) => {    
+    // -- Redirection to the login -- //
     res.redirect('/authentication/');
 });
 
@@ -55,10 +89,11 @@ app.get('/error', (req, res, next) => {
 // -- Laod all routes modules -- //
 app.use('/authentication', authenticationRoute);
 app.use('/administration', administrationRoute);
+app.use('/chat', chatRoute);
 //#endregion
 
 //#region  Execute application
 server.listen(global.$appSettings.port, global.$appSettings.host, () => {
-    global.$appModule.consoleOut('Tha app is statrting on the url: ' + global.$appSettings.host + ':' + global.$appSettings.port + '/')
+    global.$appModule.consoleOut('Tha app is statrting on the url: ' + global.$appSettings.host + ':' + global.$appSettings.port + '/');
 });
 //#endregion

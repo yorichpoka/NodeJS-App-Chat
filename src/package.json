@@ -2,21 +2,29 @@
     "name": "nodejs-app-chat",
     "version": "0.1.0",
     "main": "app.js",
-    "start": "node ./bin/www",
+    "scripts": {
+        "start": "grunt && browserify modules/appModule.js -o public/js/appModule.dist.js & node server.js"
+    },
     "dependencies": {
         "body-parser": "~1.10.1",
         "bootstrap": "~4.1.3",
+        "cookie-parser": "^1.4.3",
         "cookie-session": "~1.1.0",
+        "crypto-js": "^3.1.9-1",
         "ejs": "~2.1.4",
         "express": "~4.11.0",
+        "grunt": "^1.0.3",
         "jquery": "^3.3.1",
         "jsdom": "^13.0.0",
         "log4js": "^3.0.6",
         "moment": "^2.22.2",
         "mysql": "^2.16.0",
         "nprogress": "^0.2.0",
-        "popper.js": "^1.14.5",
-        "socket.io": "~2.1.1"
+        "socket.io": "~2.1.1",
+        "uniqid": "^5.0.3"
+    },
+    "devDependencies": {
+        "grunt-contrib-jshint": "^1.1.0"
     },
     "author": "Ulrich POKA <yorich.poka@gmail.com>",
     "description": "A tchat application for many users."

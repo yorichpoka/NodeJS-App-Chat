@@ -135,5 +135,36 @@ module.exports = class UserDAO extends dao {
             }
         });
     }  
+
+    getCodePassword(code, password) {
+        var that = this;
+
+        return new Promise((successCallback) => {
+            try {
+                // -- Create connecion -- //
+                var con = appModule.mysqlConnection();
+            
+                // -- Execute query -- //
+                con.connect(function(err) {
+                    // -- Check if error -- //
+                    if (err) { global.$logger.error(err); throw err; }
+                
+                    // -- Query -- //
+                    con.query( 
+                        "SELECT *  FROM " + that.tableName + " WHERE code='" + code + "' and password='" + password + "'",
+                        function (err, result) {
+                            // -- Check if error -- //
+                            if (err) { global.$logger.error(err); result = []; }
+                            
+                            // -- Execute successCallback -- //
+                            successCallback(result);
+                        }
+                    );
+                });
+            } catch (ex) {
+                global.$logger.error(ex);
+            }
+        });
+    }  
   }
 

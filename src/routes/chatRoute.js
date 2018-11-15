@@ -14,14 +14,9 @@ router.use(function(req, res, next) {
 // define the home page route
 router.get('/', function(req, res) {
     res.render(
-        'authentication/index.ejs', 
+        'chat/index.ejs', 
         { 
-            title: 'Authentication', 
-            version: global.$appSettings.build_version.version,
-            cryptoJSAESKey: global.$appSettings.cryptoJSAESKey,
-            appParameters: global.$appModule.convert.toEncryptAES({
-                messageBoxVisibilityDelay: global.$appSettings.messageBoxVisibilityDelay
-            })
+            title: 'Messagerie'
         }
     );
 });
@@ -33,12 +28,10 @@ router.post('/', function(req, res) {
             .then(
                 function(result){
                     // -- isSuccess -- //
-                    if (!(Array.isArray(result) && result.length != 0)){
+                    if (result.length === 0){
                         notificationBO = new NotificationBO(null, false, 'Compte ou mot de passe incorrect');
                     } else {
                         notificationBO = new NotificationBO('/' + req.body.module + '/');
-                        // -- Update user in session -- //
-                        req.session.con.user = result[0];
                     }
                     // -- Send like response -- //
                     res.send(notificationBO);
@@ -48,7 +41,7 @@ router.post('/', function(req, res) {
 
 // define the about route
 // router.get('/main', (req, res) => {
-//     res.send('Authentication main page Get');
+//     res.send('chat main page Get');
 // });
 
 module.exports = router;

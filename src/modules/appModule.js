@@ -2,6 +2,7 @@
 // -- Modules -- //
 var mysql = require('mysql'),
     moment = require('moment'),
+    cryptoJS = require('crypto-js'),
     log4js = require('log4js');
 //#endregion
 
@@ -80,6 +81,35 @@ function toDateToString(value) {
 
     return null;
 }
+
+// -- Encrypt value -- //
+function toEncryptAES(value, key = null){
+    try {
+        return cryptoJS.AES.encrypt(
+                JSON.stringify(value), 
+                key ===null ? global.$appSettings.cryptoJSAESKey
+                            : key
+                ).toString();
+    } catch (ex){
+        console.log(ex);
+    }
+    return null;
+}
+
+// -- Encrypt value -- //
+function toDecryptAES(value, key = null){
+    try {
+        return JSON.parse(
+                    cryptoJS.AES.decrypt(
+                        value, 
+                        key ===null ? global.$appSettings.cryptoJSAESKey
+                                    : key
+                    ).toString(cryptoJS.enc.Utf8));
+    } catch (ex){
+        console.log(ex.message);
+    }
+    return null;
+}
 //#endregion
 
 //#region Exportation
@@ -90,7 +120,9 @@ module.exports = {
     mysqlConnection: mysqlConnection,
     redirection: redirection,
     convert: { 
-        toDateToString: toDateToString
+        toDateToString: toDateToString,
+        toEncryptAES: toEncryptAES,
+        toDecryptAES: toDecryptAES
     }
 }
 // -- browser -- //

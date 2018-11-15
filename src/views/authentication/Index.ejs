@@ -6,121 +6,132 @@
     <% include _partials/_header %>
 </head>
 
-<body>
+<body class="bg-light">
+
+    <div class="header header-logged-out width-full pt-5 pb-4" role="banner">
+        <div class="container clearfix width-full text-center">
+            <a class="header-logo" href="https://github.com/">
+                <img src='/images/png/iroll.png' style="height: 50px;" class="img-responsive" />
+            </a>
+        </div>
+    </div>
 
     <div class="container">
-
-        <div class="row">
-
-            <div class="col-xl-4 d-none d-xl-block"></div>
-
-            <div class="col-sm-12 col-xl-4">
-        
-                <div class="row">
-                    <div class="col-xl-12 
-                                d-xl-block d-sm-node d-md-none 
-                                pb-3" style="cursor:pointer;">
-                        <center>
-                            <img src='/images/png/iroll.png' style="height: 70px;" class="img-responsive" />
-                        </center>
-                    </div> 
-                    <div class="col-xl-12 text-center">
-                        <p class="lead">
-                            Se connecter à Diaspora Santé
+        <div class="auth-form px-3">
+            <input type="hidden" id="input_parameters" value="<%= cryptoJSAESKey %>,<%= appParameters %>">
+            <form role="form" id="form" method="POST" data-parsley-validate>
+                <div class="col-xl-12 text-center">
+                    <p class="h4 mb-3">
+                        Se connecter à iRoll
+                    </p>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="login">Compte :</label>
+                            <input class="form-control" placeholder="Compte..." name="code" id="code" type="text"
+                                required autofocus />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe :</label>
+                            <a href="#" class="float-right card-link">Oublié?</a>
+                            <input class="form-control" placeholder="Mot de passe..." name="password" id="password"
+                                type="password" required />
+                        </div>
+                        <div class="form-group">
+                                <label for="password">Module :</label>
+                                <select class="form-control" name="module">
+                                    <option value="chat">Chat</option>
+                                    <option value="administration">Administration</option>
+                                </select>
+                        </div>
+                        <div>
+                            <label>
+                                <input name="remember" id="remember" type="checkbox" class="flat-iCheck"> Se
+                                souvenir de moi
+                            </label>
+                        </div>
+                        <button id="bt_submit" type="submit" class="btn btn-success btn-block" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Authentification en cours...">
+                            Se connecter
+                        </button>
+                    </div>
+                </div>
+                <div class="card mb-5">
+                    <div class="card-body bg-light text-center">
+                        <p class="card-text">
+                            Nouveau iRoll? <a href="#" class="card-link">Créer un compte.</a>
                         </p>
                     </div>
                 </div>
-        
-                <div class="login-panel panel panel-default">
-        
-                    <div class="panel-body">
-                        <form role="form" id="form" method="POST" data-parsley-validate>
-                            <fieldset>
-                                <!-- ./Hiddent -->
-                                <div class="form-group">
-                                    <label for="login">Compte <small class="text-red">*</small>:</label>
-                                    <input class="form-control" placeholder="Compte..." name="code" id="code" type="text" required autofocus />
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Mot de passe <small class="text-red">*</small>:</label>
-                                    <input class="form-control" placeholder="Mot de passe..." name="password" id="password" type="password" required />
-                                </div>        
-                                <div>
-                                    <label>
-                                        <input name="remember" id="remember" type="checkbox" class="flat-iCheck"> Se souvenir de moi
-                                    </label>
-                                </div>
-                                <button id="bt_submit" type="submit" class="btn btn-lg btn-success btn-block"
-                                        data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Authentification en cours...">
-                                    <i class="fa fa-check"></i> Se connecter
-                                </button>
-                            </fieldset>
-                        </form>
-                    </div>
-        
+                <div class="text-center">
+                    <a>
+                        © POKA <small>V. <%= version %></small>
+                    </a>
+                    <a class="link-gray ml-4" href="https://github.com/contact">
+                        Contacter iRoll
+                    </a>
                 </div>
-        
-                <div class="col-lg-12 pt-3 text-center">
-                    <span id="dnn_dnnCOPYRIGHT_lblCopyright" class="footer">
-                        2018 V <%= version %></small>
-                    </span>
-                </div>
-        
-            </div>
-
-            <div class="col-xl-4 d-none d-xl-block"></div>
-                
+            </form>
         </div>
-        
     </div>
 
     <% include _partials/_footer %>
 
+    <% include ../_shared/_modals %>
+
     <script type="text/javascript">
 
-        $("#form").submit(
-            function (event) {
-                // -- Annuler l'action par défaut -- //
-                event.preventDefault();
+        $(
+            function(){
+                // -- Load global parameters in app var -- //
+                loadGlobalParameters($('#input_parameters').val().split(','));
 
-                // -- Variable -- //
-                var form = $(this);
+                // -- On form submit -- //
+                $("#form").submit(
+                    function (event) {
+                        // -- Annuler l'action par défaut -- //
+                        event.preventDefault();
 
-                // -- Check if form is validate -- //
-                if (!form.parsley().isValid()) {
-                    return false;
-                }
+                        // -- Variable -- //
+                        var form = $(this);
 
-                // -- Afficher/Cacher l'etat de chargement de la page -- //
-                displayLoadingPage(true, 'bt_submit');
-
-                //#region Ajax
-                $.ajax({
-                    type: "POST",
-                    url: '/authentication/',
-                    data: form.serialize() + '&remember=' + $("#remember").prop('checked'),
-                    success: function (resultat) {
-                        if (!resultat.notification.est_echec) {
-                            // -- Redirection -- //
-                            appModule.redirection(resultat.notification.donnee.url);
-                        } else {
-                            // -- Reset le formulaire -- //
-                            form[0].reset();
-                            // -- Notifier -- //
-                            messageBox(resultat.notification);
+                        // -- Check if form is validate -- //
+                        if (!form.parsley().isValid()) {
+                            return false;
                         }
 
                         // -- Afficher/Cacher l'etat de chargement de la page -- //
-                        displayLoadingPage(false, 'bt_submit');
-                    },
-                    error: function () {
-                        // -- Afficher/Cacher l'etat de chargement de la page -- //
-                        displayLoadingPage(false, 'bt_submit');
-                        // -- Notifier -- //
-                        messageBox();
+                        displayLoadingPage(true);
+
+                        //#region Ajax
+                        $.ajax({
+                            type: "POST",
+                            url: '/authentication/',
+                            data: form.serialize() + '&remember=' + $("#remember").prop('checked'),
+                            success: function (result) {
+                                if (result.isSuccess) {
+                                    // -- Redirection -- //
+                                    appModule.redirection(result.data);
+                                } else {
+                                    // -- Reset le formulaire -- //
+                                    form[0].reset();
+                                    // -- Notifier -- //
+                                    messageBox(result);
+                                }
+
+                                // -- Afficher/Cacher l'etat de chargement de la page -- //
+                                displayLoadingPage(false);
+                            },
+                            error: function () {
+                                // -- Afficher/Cacher l'etat de chargement de la page -- //
+                                displayLoadingPage(false);
+                                // -- Notifier -- //
+                                messageBox();
+                            }
+                        });
+                        //#endregion
                     }
-                });
-                //#endregion
+                );
             }
         );
 

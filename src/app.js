@@ -1,12 +1,11 @@
 // -- Modules -- //
 var appStart = require('./modules/appStart')();
     // userDAO = require('./models/dao/userDAO'),
-    messageDAO = require('./models/dao/messageDAO'),
+    var messageDAO = require('./models/dao/messageDAO');
     // userBO = require('./models/bo/userBO'),
-    appModule = require('./modules/appModule'),
-    $ = require('jquery'),
-    authenticationRoute = require('./routes/authenticationRoute'),
-    moment = require('moment');
+    var appModule = require('./modules/appModule');
+    var $ = require('jquery');
+    var authenticationRoute = require('./routes/authenticationRoute');
 
 var dao = new messageDAO();
 
@@ -62,4 +61,13 @@ var dao = new messageDAO();
 // );
 
 // -- Defini routes -- //
-app.use('/authenticationRoute', authenticationRoute);
+// app.use('/authenticationRoute', authenticationRoute);
+
+var value = 'POKA';
+value = global.$appModule.convert.toEncryptAES(value);
+
+console.log('toEncryptAES, POKA: ' + value);
+
+value = global.$appModule.convert.toDencryptAES(value);
+
+console.log('toDencryptAES, POKA: ' + value);

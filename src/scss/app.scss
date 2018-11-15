@@ -1,0 +1,15 @@
+// #region Bootstrap
+// Update parameters 
+$green:   #1abc9c;
+
+// Update theme
+// $theme-colors: (
+//   "primary": #495057
+// );
+
+// // Update values -- //
+// $input-height: calc($input-height + $input-height);
+
+// Include all of Bootstrap
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+// #endregion
